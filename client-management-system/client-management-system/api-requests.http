@@ -1,0 +1,68 @@
+### Example API requests for the Client Management System.
+### IntelliJ IDEA can run these with the green arrow next to each request
+### (HTTP Client). Start the application first. Replace the IDs with real ones.
+
+### Health check (is MongoDB reachable?)
+GET http://localhost:8080/api/health
+
+### Create a client (status becomes LEAD automatically)
+POST http://localhost:8080/api/clients
+Content-Type: application/json
+
+{
+  "firstName": "Alex",
+  "lastName": "Smith",
+  "email": "alex@example.com",
+  "phone": "+19876543210",
+  "companyName": "Smith Technologies",
+  "address": "New York",
+  "clientType": "BUSINESS",
+  "notes": "Interested in website development"
+}
+
+### List clients with search and filters
+GET http://localhost:8080/api/clients?search=alex&status=ACTIVE&clientType=BUSINESS
+
+### Client summary
+GET http://localhost:8080/api/clients/REPLACE_WITH_REAL_CLIENT_ID/summary
+
+### Create a project (a LEAD client becomes ACTIVE)
+POST http://localhost:8080/api/projects
+Content-Type: application/json
+
+{
+  "name": "Company Website",
+  "description": "Build a responsive company website",
+  "clientId": "REPLACE_WITH_REAL_CLIENT_ID",
+  "status": "PLANNED",
+  "priority": "HIGH",
+  "startDate": "2026-10-16",
+  "dueDate": "2026-12-20",
+  "budget": 2500.00
+}
+
+### Overdue projects
+GET http://localhost:8080/api/projects/overdue
+
+### Projects filtered by status and priority
+GET http://localhost:8080/api/projects?status=IN_PROGRESS&priority=HIGH
+
+### Projects of one client
+GET http://localhost:8080/api/clients/REPLACE_WITH_REAL_CLIENT_ID/projects
+
+### Add an interaction
+POST http://localhost:8080/api/clients/REPLACE_WITH_REAL_CLIENT_ID/interactions
+Content-Type: application/json
+
+{
+  "type": "MEETING",
+  "subject": "Initial requirements discussion",
+  "description": "Discussed the client's website requirements.",
+  "interactionDate": "2026-10-16"
+}
+
+### Interaction history (newest first)
+GET http://localhost:8080/api/clients/REPLACE_WITH_REAL_CLIENT_ID/interactions
+
+### Dashboard statistics
+GET http://localhost:8080/api/dashboard/summary
